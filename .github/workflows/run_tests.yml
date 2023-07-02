@@ -12,7 +12,7 @@ jobs:
   run_smoke_tests:
     runs-on: ubuntu-20.04
     permissions:
-      repositories: write
+      contents: write
 
     defaults:
       run:
