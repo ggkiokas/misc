@@ -5,7 +5,7 @@ on:
     inputs:
       tags:
         description: "Test scenario tags"
-        required: false
+        required: true
         default: "smoke"
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: .
+        working-directory: ./tests
 
     steps:
       - name: Checkout repo
@@ -24,16 +24,15 @@ jobs:
       - name: Install Python 3
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: 3.8
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pwd
-          pip install -r $(pwd)/qa_requirements.txt
-
+          pip install -r requirements.txt
       - name: Prepare Allure history
         run: |
+          cd ..
           mkdir -p allure-results
       - name: Run tests with behave
         run: |
