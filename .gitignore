@@ -1,0 +1,30 @@
+*.pyc
+*.log
+
+
+# Unit test / coverage reports
+.cache
+.pytest_cache/
+pytestdebug.log
+
+# pyenv
+.python-version
+
+# Environments
+venv/
+
+# IDEs
+.idea/
+.vscode/
+.history/
+
+# Data load files
+common/reports/**/*.json
+common/reports/**/*.html
+
+# Secrets files
+env.sh
+env_docker.sh
+
+# SQL scripts
+*.sql
