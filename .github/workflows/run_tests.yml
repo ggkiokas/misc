@@ -11,6 +11,8 @@ on:
 jobs:
   run_smoke_tests:
     runs-on: ubuntu-20.04
+    permissions:
+      repositories: write
 
     defaults:
       run:
@@ -57,8 +59,6 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          permissions:
-            contents: write
           github_token: ${{ secrets.ACTIONS_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
