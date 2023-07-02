@@ -36,9 +36,7 @@ jobs:
           mkdir -p allure-results
       - name: Run tests with behave
         run: |
-          ls
-          pwd
-          behave tests/login.feature -f allure_behave.formatter:AllureFormatter -o allure-results --no-capture
+          behave login.feature -f allure_behave.formatter:AllureFormatter -o allure-results --no-capture
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
