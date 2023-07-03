@@ -55,11 +55,6 @@ jobs:
           allure_history: allure-history
           keep_reports: 5
 
-      # - name: Copy Allure report files
-      #   run: |
-      #     cp -R allure-results/* allure-history/
-      #   working-directory: ./tests
-
       - name: Deploy Allure report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
@@ -68,7 +63,10 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-      # - name: List files in allure-history
-      #   run: |
-      #     ls -R allure-history
-      #     ls -R allure-results
+      - name: Send GitHub Pages Link to Slack
+        uses: slack/send-message@v3
+        env:
+          SLACK_BOT_TOKEN: xoxb-1046381141911-5478998179505-5KlLpokIJXWYBp5sDW9BpWKF
+        with:
+          channel: T011CB745ST
+          text: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
