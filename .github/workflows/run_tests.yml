@@ -66,7 +66,7 @@ jobs:
 
       - name: Post to a Slack channel
         id: slack
-        needs: gh-pages
+        need: gh-pages
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: C05DSQH4PQU
