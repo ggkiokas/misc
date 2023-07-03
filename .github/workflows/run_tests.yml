@@ -69,9 +69,12 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
+<<<<<<< HEAD
 
       - name: Echo Run Number
         run: echo "Run Number: $GITHUB_RUN_NUMBER"
+=======
+>>>>>>> parent of 55c8bbe... finalll
 
       # - name: Post to a Slack channel
       #   if: always() && ${{ needs.gh-pages.result == 'success' }}
