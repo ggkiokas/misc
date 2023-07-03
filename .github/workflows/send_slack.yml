@@ -10,10 +10,19 @@ jobs:
   send_slack_message:
     runs-on: ubuntu-latest
     steps:
+      - name: Check workflow conclusion
+        id: check_conclusion
+        run: echo "::set-output name=conclusion::${{ github.event.workflow_run.conclusion }}"
+        
       - name: Post to a Slack channel
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: C05DSQH4PQU
-          slack-message: "GitHub Pages Link:  https://ggkiokas.github.io/misc/"
+          slack-message: |
+            ${{ if eq(steps.check_conclusion.outputs.conclusion, 'success') }}
+              GitHub Pages Link: https://ggkiokas.github.io/misc/
+            ${{ else }}
+              Workflow Failed: Please check the logs for more details.
+            ${{ end }}
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
