@@ -68,6 +68,11 @@ jobs:
           github_token: ${{ secrets.ACTIONS_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+        env:
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          echo "GitHub Run Number: $GITHUB_RUN_NUMBER"
+
 
       # - name: Post to a Slack channel
       #   if: always() && ${{ needs.gh-pages.result == 'success' }}
