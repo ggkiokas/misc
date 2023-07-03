@@ -75,7 +75,7 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          channel: T011CB745ST
+          channel-id: T011CB745ST
           slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
         env:
           SLACK_BOT_TOKEN: xoxb-1046381141911-5478998179505-5KlLpokIJXWYBp5sDW9BpWKF
