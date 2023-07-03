@@ -38,7 +38,7 @@ jobs:
           mkdir -p allure-results
       - name: Run tests with behave
         run: |
-          behave login.feature -f allure_behave.formatter:AllureFormatter -o allure-results --no-capture
+          behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
@@ -55,10 +55,10 @@ jobs:
           allure_history: allure-history
           keep_reports: 5
 
-      - name: Copy Allure report files
-        run: |
-          cp -R allure-results/* allure-history/
-        working-directory: ./tests
+      # - name: Copy Allure report files
+      #   run: |
+      #     cp -R allure-results/* allure-history/
+      #   working-directory: ./tests
 
       - name: Deploy Allure report to GitHub Pages
         if: always()
@@ -68,7 +68,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-      - name: List files in allure-history
-        run: |
-          ls -R allure-history
-          ls -R allure-results
+      # - name: List files in allure-history
+      #   run: |
+      #     ls -R allure-history
+      #     ls -R allure-results
