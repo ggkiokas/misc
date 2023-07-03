@@ -7,11 +7,11 @@ on:
         description: "Test scenario tags"
         required: true
         default: "smoke"
-        
-  workflow_run:
-    workflows: ["pages-build-deployment"]
-    types:
-      - completed
+
+  # workflow_run:
+  #   workflows: ["pages-build-deployment"]
+  #   types:
+  #     - completed
 
 jobs:
   run_smoke_tests:
@@ -78,15 +78,15 @@ jobs:
       #   env:
       #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
-  send_slack_message:
-    needs: run_smoke_tests
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Post to a Slack channel
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          channel-id: C05DSQH4PQU
-          slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  # send_slack_message:
+  #   needs: run_smoke_tests
+  #   if: always()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Post to a Slack channel
+  #       uses: slackapi/slack-github-action@v1.24.0
+  #       with:
+  #         channel-id: C05DSQH4PQU
+  #         slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
+  #       env:
+  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
