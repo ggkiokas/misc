@@ -65,8 +65,7 @@ jobs:
           publish_dir: allure-history
 
       - name: Post to a Slack channel
-        id: slack
-        need: gh-pages
+        needs: gh-pages
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: C05DSQH4PQU
