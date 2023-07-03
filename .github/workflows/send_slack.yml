@@ -1,0 +1,19 @@
+name: Send Slack Message
+
+on:
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types:
+      - completed
+
+jobs:
+  send_slack_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post to a Slack channel
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: C05DSQH4PQU
+          slack-message: "GitHub Pages Link: ${{ github.event.workflow_run.event }}/${{ github.sha }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

@@ -8,11 +8,6 @@ on:
         required: true
         default: "smoke"
 
-  # workflow_run:
-  #   workflows: ["pages-build-deployment"]
-  #   types:
-  #     - completed
-
 jobs:
   run_smoke_tests:
     runs-on: ubuntu-20.04
@@ -68,6 +63,10 @@ jobs:
           github_token: ${{ secrets.ACTIONS_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+        env:
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          echo "GitHub Run Number: $GITHUB_RUN_NUMBER"
 
       # - name: Post to a Slack channel
       #   if: always() && ${{ needs.gh-pages.result == 'success' }}
@@ -77,16 +76,3 @@ jobs:
       #     slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
       #   env:
       #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
-  # send_slack_message:
-  #   needs: run_smoke_tests
-  #   if: always()
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Post to a Slack channel
-  #       uses: slackapi/slack-github-action@v1.24.0
-  #       with:
-  #         channel-id: C05DSQH4PQU
-  #         slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
-  #       env:
-  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
