@@ -73,4 +73,11 @@ jobs:
         run: echo "Run Number: ${{ github.run_number }}"
 
 
-
+      # - name: Post to a Slack channel
+      #   if: always() && ${{ needs.gh-pages.result == 'success' }}
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     channel-id: C05DSQH4PQU
+      #     slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
