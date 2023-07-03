@@ -69,8 +69,8 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-
       - name: Echo Run Number
-        run: echo "Run Number: $GITHUB_RUN_NUMBER"
+        run: echo "Run Number: ${{ github.run_number }}"
+
 
 
