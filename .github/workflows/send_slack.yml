@@ -23,10 +23,10 @@ jobs:
             echo "::set-output name=message::Workflow Failed: Please check the logs for more details."
           fi
 
-      - name: Post to a Slack channel
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          channel-id: C05DSQH4PQU
-          slack-message: "${{ steps.determine_message.outputs.message }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      # - name: Post to a Slack channel
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     channel-id: C05DSQH4PQU
+      #     slack-message: "${{ steps.determine_message.outputs.message }}"
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
