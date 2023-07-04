@@ -42,6 +42,11 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
+          pip install --upgrade pip
+          echo "Virtual environment activated"
+          pip list
+          pip install -r qa_requirements.txt
+          echo "Dependencies installed"
           pip list
 
 
