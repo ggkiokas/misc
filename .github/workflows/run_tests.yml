@@ -43,6 +43,9 @@ jobs:
         run: |
           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
+      - name: Read output file
+        run: cat $GITHUB_OUTPUT
+        
       - name: pip cache
         id: cache-req
         uses: actions/cache@v3
