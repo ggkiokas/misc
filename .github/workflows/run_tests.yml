@@ -42,6 +42,8 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
+          pip list
+
 
       - name: Cache virtual environment
         uses: actions/cache@v2
@@ -57,7 +59,14 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r qa_requirements.txt
-          
+
+      - name: Debugging
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "venv directory: $(pwd)/venv"
+          echo "Contents of venv:"
+          ls -al $(pwd)/venv
+
       - name: Prepare Allure history
         run: |
           cd ..
