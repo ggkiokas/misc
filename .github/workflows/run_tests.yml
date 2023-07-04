@@ -40,6 +40,7 @@ jobs:
 
 
       - name: Cache Python environment
+        id: cache-req
         uses: actions/cache@v2
         with:
           path: |
@@ -50,6 +51,7 @@ jobs:
             ${{ runner.os }}-python-
 
       - name: Install dependencies
+        if: steps.cache-req.outputs.cache-hit != 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r qa_requirements.txt
