@@ -39,21 +39,18 @@ jobs:
       #     pip install -r qa_requirements.txt
 
       - name: Cache virtual environment
-        uses: actions/cache@v2
         id: cache-venv
+        uses: actions/cache@v2
         with:
-          path: .venv
+          path: ./.venv/
           key: ${{ runner.os }}-venv-${{ hashFiles('./qa_requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-venv-
 
       - name: Install dependencies
+        run: python -m venv ./.venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
              
-          # pip install --upgrade pip
-          # pip install -r qa_requirements.txt
-
       # - name: Debugging
       #   run: |
       #     echo "Current directory: $(pwd)"
@@ -61,14 +58,15 @@ jobs:
       #     echo "Contents of venv:"
       #     ls -al $(pwd)/venv
 
+      - name: Run tests with behave
+        run: |
+          ./.venv/bin/activate && behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
+
       - name: Prepare Allure history
         run: |
           cd ..
           mkdir -p allure-results
 
-      - name: Run tests with behave
-        run: |
-          ./.venv/bin/activate && behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
