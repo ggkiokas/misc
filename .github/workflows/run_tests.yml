@@ -8,13 +8,6 @@ on:
         required: true
         default: "smoke"
 
-  # workflow_run:
-  #   workflows: ["pages-build-deployment"]
-  #   types:
-  #     - completed
-
-            # --tag= $ {{ matrix.test-tags}}
-
 jobs:
   run_smoke_tests:
     runs-on: ubuntu-20.04
@@ -26,9 +19,11 @@ jobs:
         shell: bash
         working-directory: ./tests
 
-    strategy:
-      matrix:
-        test-tags: ['smoke', 'sfapp']
+    # strategy:
+    #   matrix:
+    #     test-tags: ['smoke', 'sfapp']
+
+            # --tag= $ {{ matrix.test-tags}}
 
     steps:
       - name: Checkout repo
