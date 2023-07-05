@@ -67,9 +67,6 @@ jobs:
           cd ..
           mkdir -p allure-results
           mv allure-results1/* allure-results
-          mv allure-results2/* allure-results
-          echo "eeee"
-          ls allure-results
 
       - name: Get Allure history
         uses: actions/checkout@v2
