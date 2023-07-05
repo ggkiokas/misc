@@ -1,1 +1,0 @@
-[{"uid":"fd829a229a4d1548","name":"Valid Login, Logout, and invalid Login NORMAL","time":{"start":1688562948032,"stop":1688562948032,"duration":0},"status":"passed","severity":"normal"},{"uid":"a3cb81ba8fe50758","name":"Valid Login, Logout, and invalid Login LOW","time":{"start":1688562948033,"stop":1688562948033,"duration":0},"status":"passed","severity":"normal"}]
