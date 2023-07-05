@@ -84,6 +84,8 @@ jobs:
           ls 
           git branch --show-current
           touch dummy.py
+          git config --global user.email "georgegkiokas92@gmail.com"
+          git config --global user.name "ggkiokas"
           git add dummy.py
           git commit -m "dummy_commit" -a
           git push origin gh-pages
