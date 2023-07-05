@@ -49,8 +49,8 @@ jobs:
 
       - name: Debug - Print .venv path
         run: |
-          ls
-          ls ../
+          ls -a
+          ls ../ -a
 
       - name: Install dependencies
         run: python -m venv ./.venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
