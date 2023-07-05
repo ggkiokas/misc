@@ -55,9 +55,7 @@ jobs:
       - name: Run tests with behave
         run: |
           ./.venv/bin/activate &&
-          behave 
-          -f allure_behave.formatter:AllureFormatter -o ../allure-results 
-          --no-capture
+          behave -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
 
       - name: Prepare Allure history
         run: |
