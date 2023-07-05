@@ -75,14 +75,14 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
+
+      - name: Clean gh-pages branch
         run: |
+          git checkout gh-pages
           echo "pwd"
           pwd
           echo "ls"
           ls
-          git rm -rf ./*
-          git commit -m "Clean files from gh-pages branch"
-          git push origin gh-pages
 
       - name: Allure report action
         uses: simple-elf/allure-report-action@master
