@@ -68,14 +68,6 @@ jobs:
           mkdir -p allure-results
           mv allure-results1/* allure-results
 
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
       - name: Clean gh-pages branch
         run: |
           cd ..
@@ -90,6 +82,15 @@ jobs:
           git add dummy.py
           git commit -m "dummy_commit" -a
           git push origin gh-pages
+
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
 
       - name: Allure report action
         uses: simple-elf/allure-report-action@master
