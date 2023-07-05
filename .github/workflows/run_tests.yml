@@ -76,6 +76,13 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      - name: Clean files from gh-pages branch
+        run: |
+          pwd
+          echo "pwd"
+          echo "ls"
+          ls
+
       - name: Allure report action
         uses: simple-elf/allure-report-action@master
         if: always()
