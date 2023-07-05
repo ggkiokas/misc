@@ -83,7 +83,7 @@ jobs:
           echo "pwd"
           pwd
           echo "ls"
-          ls
+          ls ..
 
       - name: Allure report action
         uses: simple-elf/allure-report-action@master
