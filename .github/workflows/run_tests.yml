@@ -1,0 +1,98 @@
+name: Run Smoke Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Test scenario tags"
+        required: true
+        default: "smoke"
+
+jobs:
+  run_smoke_tests:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./tests
+
+    # strategy:
+    #   matrix:
+    #     test-tags: ['smoke', 'sfapp']
+
+            # --tag= $ {{ matrix.test-tags}}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      # - name: Cache virtual environment
+      #   id: cache-venv
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: .venv/
+      #     key: ${{ runner.os }}-venv-${{ hashFiles('./qa_requirements.txt') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-venv-
+
+      # - name: Debug - Print .venv path
+      #   run: |
+      #     ls -a
+      #     ls ../ -a
+
+      - name: Install dependencies
+        run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+
+      - name: Run tests with behave
+        run: |
+          ./.venv/bin/activate &&
+          behave -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
+
+      - name: Prepare Allure history
+        run: |
+          cd ..
+          mkdir -p allure-results
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure report action
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          # keep_reports: 5
+
+      - name: Deploy Allure report to GitHub Pages
+        id: gh-pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.ACTIONS_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
+
+      # - name: Post to a Slack channel
+      #   if: always() && ${{ needs.gh-pages.result == 'success' }}
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     channel-id: C05DSQH4PQU
+      #     slack-message: "GitHub Pages Link: https://ggkiokas.github.io/misc/21/"
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
