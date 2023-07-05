@@ -83,6 +83,7 @@ jobs:
           pwd
           ls 
           git branch --show-current
+          touch dummy.py
           git add dummy.py
           git commit -m "dummy_commit" -a
           git push origin gh-pages
