@@ -78,7 +78,7 @@ jobs:
 
       - name: Clean gh-pages branch
         run: |
-          checkout -b gh-pages
+          git checkout -b gh-pages
           pwd
           ls 
 
