@@ -83,6 +83,9 @@ jobs:
           pwd
           ls 
           git branch --show-current
+          git add dummy.py
+          git commit -m "dummy_commit" -a
+          git push origin gh-pages
 
       - name: Allure report action
         uses: simple-elf/allure-report-action@master
