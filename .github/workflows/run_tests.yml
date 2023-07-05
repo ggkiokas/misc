@@ -78,12 +78,9 @@ jobs:
 
       - name: Clean gh-pages branch
         run: |
-          echo "branch"
-          git branch
-          echo "pwd"
+          checkout -b gh-pages
           pwd
-          echo "ls"
-          ls ..
+          ls 
 
       - name: Allure report action
         uses: simple-elf/allure-report-action@master
