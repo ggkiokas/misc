@@ -52,15 +52,24 @@ jobs:
         run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
 
-      - name: Run tests with behave
+      - name: Run tests with behave 1
         run: |
           ./.venv/bin/activate &&
-          behave -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
+          behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results1 --no-capture
+
+      - name: Run tests with behave 2
+        run: |
+          ./.venv/bin/activate &&
+          behave login_normal.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results2 --no-capture
 
       - name: Prepare Allure history
         run: |
           cd ..
           mkdir -p allure-results
+          mv allure-results1/* allure-results
+          mv allure-results2/* allure-results
+          echo "eeee"
+          ls allure-results
 
       - name: Get Allure history
         uses: actions/checkout@v2
