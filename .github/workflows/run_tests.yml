@@ -53,12 +53,12 @@ jobs:
           pip install --upgrade pip
           pip install -r qa_requirements.txt
 
-      - name: Debugging
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "venv directory: $(pwd)/venv"
-          echo "Contents of venv:"
-          ls -al $(pwd)/venv
+      # - name: Debugging
+      #   run: |
+      #     echo "Current directory: $(pwd)"
+      #     echo "venv directory: $(pwd)/venv"
+      #     echo "Contents of venv:"
+      #     ls -al $(pwd)/venv
 
       - name: Prepare Allure history
         run: |
