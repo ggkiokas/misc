@@ -13,6 +13,8 @@ on:
   #   types:
   #     - completed
 
+            # --tag= $ {{ matrix.test-tags}}
+
 jobs:
   run_smoke_tests:
     runs-on: ubuntu-20.04
@@ -60,7 +62,6 @@ jobs:
           ./.venv/bin/activate &&
            behave
           -f allure_behave.formatter:AllureFormatter -o ../allure-results
-          --tag= $ {{ matrix.test-tags}}
           --no-capture
 
       - name: Prepare Allure history
