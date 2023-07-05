@@ -24,6 +24,10 @@ jobs:
         shell: bash
         working-directory: ./tests
 
+    strategy:
+      matrix:
+        test-tags: ['smoke', 'sfapp']
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -50,10 +54,14 @@ jobs:
       - name: Install dependencies
         run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
-             
+
       - name: Run tests with behave
         run: |
-          ./.venv/bin/activate && behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results --no-capture
+          ./.venv/bin/activate &&
+           behave
+          -f allure_behave.formatter:AllureFormatter -o ../allure-results
+          --tag= $ {{ matrix.test-tags}}
+          --no-capture
 
       - name: Prepare Allure history
         run: |
