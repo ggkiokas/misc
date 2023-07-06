@@ -1,4 +1,4 @@
-name: Run Smoke Tests
+name: Run Smoke Tests Parallel
 
 on:
   workflow_dispatch:
@@ -19,11 +19,9 @@ jobs:
         shell: bash
         working-directory: ./tests
 
-    # strategy:
-    #   matrix:
-    #     test-tags: ['smoke', 'sfapp']
-
-            # --tag= $ {{ matrix.test-tags}}
+    strategy:
+      matrix:
+        test-suites: ['login', 'login_normal']
 
     steps:
       - name: Checkout repo
@@ -34,43 +32,42 @@ jobs:
         with:
           python-version: 3.9
 
-      # - name: Cache virtual environment
-      #   id: cache-venv
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: .venv/
-      #     key: ${{ runner.os }}-venv-${{ hashFiles('./qa_requirements.txt') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-venv-
-
-      # - name: Debug - Print .venv path
-      #   run: |
-      #     ls -a
-      #     ls ../ -a
-
       - name: Install dependencies
         run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
 
-      - name: Run tests with behave 1
+      - name: Run tests with behave ${{ matrix.test-suites}}
         run: |
           ./.venv/bin/activate &&
-          behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results1 --no-capture
-
-      - name: Run tests with behave 2
-        run: |
-          ./.venv/bin/activate &&
-          behave login_normal.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results2 --no-capture
-
+          behave ${{ matrix.test-suites}}.feature -f allure_behave.formatter:AllureFormatter -o ../allure_result_${{ matrix.test-suites}} --no-capture
 
       - name: Prepare Allure history
         run: |
           cd ..
           mkdir -p allure-results
-          mv allure-results1/* allure-results
-          mv allure-results2/* allure-results
+          mv allure_result_${{ matrix.test-suites}}/* allure-results
           ls allure-results
 
+      - name: Upload Allure results artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results-art
+          path: ../allure-results
+
+  serve_allure_report:
+    needs: run_smoke_tests
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Download Allure results artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-results-art
+          path: allure-results
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -96,3 +93,6 @@ jobs:
           github_token: ${{ secrets.ACTIONS_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+
+
+
