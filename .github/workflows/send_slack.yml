@@ -19,6 +19,7 @@ jobs:
         run: |
           if [[ "${{ steps.check_conclusion.outputs.conclusion }}" == "success" ]]; then
             echo "::set-output name=message::GitHub Pages Link: https://ggkiokas.github.io/misc/"
+            echo "aaaaaa"
           else
             echo "::set-output name=message::Workflow Failed: Please check the logs for more details."
           fi
