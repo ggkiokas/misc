@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Check workflow conclusion
         id: check_conclusion
-        run: echo "::set-output name=conclusion::${{ github.event.workflow_run.conclusion }}"
-        
+        run: echo "conclusion=${{ github.event.workflow_run.conclusion }} >> $GITHUB_OUTPUT"
+   
       - name: Determine Slack message
         id: determine_message
         run: |
@@ -34,3 +34,5 @@ jobs:
 
             # echo "::set-output name=message::GitHub Pages Link: https://ggkiokas.github.io/misc/"
             # echo "::set-output name=message::Workflow Failed: Please check the logs for more details."
+
+        # run: echo "::set-output name=conclusion::${{ github.event.workflow_run.conclusion }}"

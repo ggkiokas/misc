@@ -37,7 +37,7 @@ jobs:
       - name: Prepare Allure history
         run: |
           mkdir -p allure-results
-          mv a1111111111llure_result_${{ matrix.test-suites}}/* allure-results
+          mv allure_result_${{ matrix.test-suites}}/* allure-results
           ls allure-results
 
       - name: Upload Allure results artifact
