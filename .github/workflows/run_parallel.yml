@@ -14,11 +14,6 @@ jobs:
     permissions:
       contents: write
 
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./tests
-
     strategy:
       matrix:
         test-suites: ['login', 'login_normal']
@@ -33,17 +28,16 @@ jobs:
           python-version: 3.9
 
       - name: Install dependencies
-        run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
+        run: python -m venv venv && ./venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
 
       - name: Run tests with behave ${{ matrix.test-suites}}
         run: |
           ./.venv/bin/activate &&
-          behave ${{ matrix.test-suites}}.feature -f allure_behave.formatter:AllureFormatter -o ../allure_result_${{ matrix.test-suites}} --no-capture
+          tests/behave ${{ matrix.test-suites}}.feature -f allure_behave.formatter:AllureFormatter -o allure_result_${{ matrix.test-suites}} --no-capture
 
       - name: Prepare Allure history
         run: |
-          cd ..
           mkdir -p allure-results
           mv allure_result_${{ matrix.test-suites}}/* allure-results
           ls allure-results
@@ -52,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: allure-results-art
-          path: ../allure-results
+          path: allure-results
 
   serve_allure_report:
     needs: run_smoke_tests
