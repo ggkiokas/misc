@@ -19,15 +19,19 @@ jobs:
         run: |
           if [[ "${{ steps.check_conclusion.outputs.conclusion }}" == "success" ]]; then
             echo "::set-output name=message::GitHub Pages Link: https://ggkiokas.github.io/misc/"
-            echo "aaaaaa"
           else
             echo "::set-output name=message::Workflow Failed: Please check the logs for more details."
+            echo "failure"
           fi
 
       # - name: Post to a Slack channel
       #   uses: slackapi/slack-github-action@v1.24.0
       #   with:
       #     channel-id: C05DSQH4PQU
-      #     slack-message: "${{ steps.determine_message.outputs.message }}"
+      #     slackecho "-message: "${{ steps.determine_message.outputs.message }}"
       #   env:
       #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+
+      # echo "::set-output name=message::GitHub Pages
+      # echo  'message={GitHub Pages Link: https://ggkiokas.github.io/misc/}' >> $GITHUB_OUTPUT
