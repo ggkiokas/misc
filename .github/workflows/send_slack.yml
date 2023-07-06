@@ -2,7 +2,7 @@ name: Send Slack Message
 
 on:
   workflow_run:
-    workflows: ["pages-build-deployment", "Run Smoke Tests Parallel"]
+    workflows: ["pages-build-deployment"]
     types:
       - completed
 
@@ -22,6 +22,7 @@ jobs:
           else
             echo "message={Workflow Failed: Please check the logs for more details." >> $GITHUB_OUTPUT       
           fi
+
 
       # - name: Post to a Slack channel
       #   uses: slackapi/slack-github-action@v1.24.0
