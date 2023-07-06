@@ -13,7 +13,12 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Show ls
+        run: |
+          ls allure-results
+
 
       - name: Install Python 3
         uses: actions/setup-python@v1
@@ -50,7 +55,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download Allure results artifact
         uses: actions/download-artifact@v3
@@ -75,16 +80,16 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # - name: Download Allure results artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: allure-results-art
-      #     path: allure-results
+      - name: Download Allure results artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: allure-results-art
+          path: allure-results
 
       - name: Get Allure history
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
