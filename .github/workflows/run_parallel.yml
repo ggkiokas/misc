@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        test-suites: ['login', 'login_normal']
+        test-suites: ['login', 'login_normal', 'signup']
 
     steps:
       - name: Checkout repo
