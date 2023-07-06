@@ -68,7 +68,7 @@ jobs:
   
 
   serve_allure_report:
-    needs: run_smoke_tests
+    needs: push_allure_json_results
     runs-on: ubuntu-20.04
     permissions:
       contents: write
