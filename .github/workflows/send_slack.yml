@@ -2,7 +2,7 @@ name: Send Slack Message
 
 on:
   workflow_run:
-    workflows: ["pages-build-deployment"]
+    workflows: ["pages-build-deployment", "Run Smoke Tests Parallel"]
     types:
       - completed
 
