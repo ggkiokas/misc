@@ -57,11 +57,10 @@ jobs:
           ./.venv/bin/activate &&
           behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results1 --no-capture
 
-      # - name: Run tests with behave 2
-      #   run: |
-      #     ./.venv/bin/activate &&
-      #     behave login_normal.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results2 --no-capture
-      #               mv allure-results2/* allure-results
+      - name: Run tests with behave 2
+        run: |
+          ./.venv/bin/activate &&
+          behave login_normal.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results2 --no-capture
 
 
       - name: Prepare Allure history
@@ -69,6 +68,7 @@ jobs:
           cd ..
           mkdir -p allure-results
           mv allure-results1/* allure-results
+          mv allure-results2/* allure-results
           ls allure-results
 
 
