@@ -77,11 +77,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Download Allure results artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: allure-results-art
-          path: allure-results
+      # - name: Download Allure results artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: allure-results-art
+      #     path: allure-results
 
       - name: Get Allure history
         uses: actions/checkout@v2
