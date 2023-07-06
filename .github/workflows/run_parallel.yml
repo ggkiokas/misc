@@ -33,7 +33,7 @@ jobs:
 
       - name: Run tests with behave ${{ matrix.test-suites}}
         run: |
-          ./.venv/bin/activate &&
+          ./venv/bin/activate &&
           tests/behave ${{ matrix.test-suites}}.feature -f allure_behave.formatter:AllureFormatter -o allure_result_${{ matrix.test-suites}} --no-capture
 
       - name: Prepare Allure history
