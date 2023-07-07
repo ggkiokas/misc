@@ -1,0 +1,46 @@
+name: Cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run_smoke_tests:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    - run: pip install -r qa_requirements.txt
+    - run: pip test
+
+      # - name: Install Python 3
+      #   uses: actions/setup-python@v1
+      #   with:
+      #     python-version: 3.9
+
+      # - name: Cache virtual environment
+      #   id: cache-venv
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: .venv/
+      #     key: ${{ runner.os }}-venv-${{ hashFiles('./qa_requirements.txt') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-venv-
+
+      # - name: Install dependencies
+      #   run: python -m venv .venv && ./.venv/bin/activate && pip install --upgrade pip && pip install -r qa_requirements.txt
+      #   if: steps.cache-venv.outputs.cache-hit != 'true'
+
+      # - name: Run tests with behave 1
+      #   run: |
+      #     ./.venv/bin/activate &&
+          # behave login.feature -f allure_behave.formatter:AllureFormatter -o ../allure-results1 --no-capture
