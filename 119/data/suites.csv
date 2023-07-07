@@ -1,4 +1,5 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Jul 06 08:06:27 GMT 2023","Thu Jul 06 08:06:27 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login NORMAL",""
-"passed","Thu Jul 06 08:06:27 GMT 2023","Thu Jul 06 08:06:27 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login LOW",""
-"passed","Thu Jul 06 08:06:27 GMT 2023","Thu Jul 06 08:06:27 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login",""
+"passed","Fri Jul 07 23:17:13 GMT 2023","Fri Jul 07 23:17:13 GMT 2023","1","","","","","","Sign Up valid",""
+"passed","Fri Jul 07 23:17:18 GMT 2023","Fri Jul 07 23:17:18 GMT 2023","0","","","","","","Valid Login, Logout, and invalid Login NORMAL",""
+"passed","Fri Jul 07 23:17:17 GMT 2023","Fri Jul 07 23:17:17 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login",""
+"passed","Fri Jul 07 23:17:18 GMT 2023","Fri Jul 07 23:17:18 GMT 2023","0","","","","","","Valid Login, Logout, and invalid Login LOW",""
