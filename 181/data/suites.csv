@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Jul 10 16:25:07 GMT 2023","Mon Jul 10 16:25:07 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login LOW",""
+"passed","Mon Jul 10 16:25:35 GMT 2023","Mon Jul 10 16:25:35 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login",""
+"passed","Mon Jul 10 16:25:07 GMT 2023","Mon Jul 10 16:25:07 GMT 2023","1","","","","","","Valid Login, Logout, and invalid Login NORMAL",""
+"passed","Mon Jul 10 16:25:08 GMT 2023","Mon Jul 10 16:25:08 GMT 2023","1","","","","","","Sign Up valid",""
