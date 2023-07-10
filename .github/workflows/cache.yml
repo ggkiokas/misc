@@ -32,7 +32,7 @@ jobs:
       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
 
     - name: Test
-      run: py.test
+      run: behave login.feature
 
       # - name: Install Python 3
       #   uses: actions/setup-python@v1
