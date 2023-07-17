@@ -2,7 +2,7 @@ name: Run Smoke Tests Parallel
 
 on:
   schedule:
-    - cron: '*/59 * * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
